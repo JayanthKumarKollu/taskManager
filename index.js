@@ -11,7 +11,7 @@ app.use(express.json());
 require("dotenv").config();
 app.use(
     cors({
-      origin: "http://localhost:4200", // Replace with your Angular app URL
+      origin: process.env.FRONTEND_URL, // Replace with your Angular app URL
       methods: "GET,POST,PUT,DELETE",
       allowedHeaders: "Content-Type,Authorization",
     })
