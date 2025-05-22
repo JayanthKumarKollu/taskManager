@@ -1,0 +1,5 @@
+# by adding the file names in this file those files are encapsulated
+
+/node_modules
+.env
+
