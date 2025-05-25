@@ -13,7 +13,12 @@ const taskSchema = new mongoose.Schema({
     completed:{
         type:Boolean,
         default:false
+    },
+       userID:
+            {type:mongoose.Schema.Types.ObjectId,
+            ref:"userCollections"
     }
+    
 });
 
 

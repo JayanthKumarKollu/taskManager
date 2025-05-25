@@ -1,26 +1,38 @@
 
-const task = require("../models/task")
-const getItemsList = async (req,res)=>{
-try {
-    const items = await task.find({});
-    res.status(200).json({items})
-} catch (error) {
-    res.status(500).json({msg:error})
-}
-}
+const task = require("../models/task");
+const User = require("../models/user")
 
-const getItem= async(req,res)=>{
+
+const getItems= async(req,res)=>{
     try {
-        const item = await task.findById({_id:req.params.id})
-        if(!item)
-        {
-        return  res.status(404).json({msg:"item not found"})
+        let id = req.params.id;
+        const item = await task.find({userID:id});
+        console.log(item)
+        if(item.length>0){
+        res.status(200).json(item)
         }
-           
-        res.status(200).json({item})
+        else{
+            res.status(400).json("no data found.")
+        }
+    } catch (error) {
+            res.status(500).json({mesg:error})
+    }
+
+}
+const getItemtoUpdate= async(req,res)=>{
+    try {
+        console.log("selected id",req.params.id)
+        const item = await task.findOne({_id:req.params.id});
+        console.log("selected updated id",item)
+        if(item){
+            res.status(200).json(item);
+        }else{
+            res.status(400).json("no data found.")
+        }
+
         
     } catch (error) {
-        res.status(500).json({msg:error})
+     res.status(500).json({mesg:error})
     }
 }
 const createItem = async (req,res)=>{
@@ -72,9 +84,10 @@ const deleteItem= async (req,res)=>{
 }
 
 module.exports ={
-    getItemsList,
-    getItem,
+    // getItemsList,
+    getItems,
     createItem,
     updateItem,
-    deleteItem
+    deleteItem,
+    getItemtoUpdate
 }

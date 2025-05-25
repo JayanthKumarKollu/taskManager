@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const task = require("./routers/tasks");
+const userRoute = require("./routers/userRout")
 const connectToDB=require("./db/connection");
 const notFound = require("./middleware/notFound");
 app.use(cors());
@@ -21,6 +22,7 @@ app.use(
 // });
 
 app.use("/api/tasks",task);
+app.use("/api/login",userRoute);
 app.use(notFound) //this is specifically to display custom error message when we didn't found any routes.
 
 
