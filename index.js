@@ -5,6 +5,7 @@ const task = require("./routers/tasks");
 const userRoute = require("./routers/userRout")
 const connectToDB=require("./db/connection");
 const notFound = require("./middleware/notFound");
+const notifier = require('./middleware/sendEmail');
 app.use(cors());
 app.use(express.json());
 // Jayanth@12345
@@ -25,7 +26,7 @@ app.use("/api/tasks",task);
 app.use("/api/login",userRoute);
 app.use(notFound) //this is specifically to display custom error message when we didn't found any routes.
 
-
+notifier();
 const port = process.env.PORT ||3000;
 
 //  app.listen(port, console.log(`Server is running on ${port}...`));

@@ -7,12 +7,11 @@ const getItems= async(req,res)=>{
     try {
         let id = req.params.id;
         const item = await task.find({userID:id});
-        console.log(item)
         if(item.length>0){
         res.status(200).json(item)
         }
         else{
-            res.status(400).json("no data found.")
+            res.status(200).json("no data added yet.")
         }
     } catch (error) {
             res.status(500).json({mesg:error})
@@ -21,9 +20,7 @@ const getItems= async(req,res)=>{
 }
 const getItemtoUpdate= async(req,res)=>{
     try {
-        console.log("selected id",req.params.id)
         const item = await task.findOne({_id:req.params.id});
-        console.log("selected updated id",item)
         if(item){
             res.status(200).json(item);
         }else{
@@ -37,7 +34,7 @@ const getItemtoUpdate= async(req,res)=>{
 }
 const createItem = async (req,res)=>{
 try {
-    const taskItem = await task.findOne({'name':req.body.name});
+    const taskItem = await task.findOne({'name':req.body.name,userID:req.body.userID});
     if(!taskItem){
         await task.insertOne(req.body);
         res.status(200).json({msg:"Task added Successfully."})

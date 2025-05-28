@@ -5,12 +5,13 @@ const {
     getItems,
     createItem,
     updateItem,
-    deleteItem} = require("../controllers/tasks")
+    deleteItem} = require("../controllers/tasks");
+const authentication = require("../middleware/auth")
 
 // route.get("/",getItemsList) 
 
-route.route("/").post(createItem);
-route.route("/loggeduser/:id").patch(updateItem).delete(deleteItem).get(getItems);
-route.route("/updateItem/:id").get(getItemtoUpdate)
+route.route("/").post(authentication,createItem);
+route.route("/loggeduser/:id").patch(authentication,updateItem).delete(authentication,deleteItem).get(authentication,getItems);
+route.route("/updateItem/:id").get(authentication,getItemtoUpdate)
 
 module.exports = route;

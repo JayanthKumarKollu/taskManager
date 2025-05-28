@@ -17,6 +17,13 @@ const taskSchema = new mongoose.Schema({
        userID:
             {type:mongoose.Schema.Types.ObjectId,
             ref:"userCollections"
+    },
+    deadline:{
+type:Date
+    },
+    isNotificationSent:{
+        type:Boolean,
+        default:false
     }
     
 });
