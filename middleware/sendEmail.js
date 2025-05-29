@@ -14,10 +14,15 @@ const sendNotification = async ()=>{
 // cron.schedule('* * * * *', async () => {
 const now = new Date();
 const fiveMins = new Date(now.getTime() + 5 * 60 * 1000);
+
+// this conversion is for server purpose for local above two line is enough
+// deadline: { $gte: now, $lte: fiveMins },
+const nowUTC = new Date(now.toISOString());
+  const fiveMinsUTC = new Date(fiveMins.toISOString());
     
   const tasks = await Tasks.find({
     completed: false,
-  
+    deadline: { $gte: nowUTC, $lte: fiveMinsUTC },
     isNotificationSent:{$ne:true}
   }).populate('userID');
 
