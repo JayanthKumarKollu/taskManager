@@ -17,7 +17,7 @@ const fiveMins = new Date(now.getTime() + 5 * 60 * 1000);
     
   const tasks = await Tasks.find({
     completed: false,
-    deadline: { $gte: now, $lte: fiveMins },
+  
     isNotificationSent:{$ne:true}
   }).populate('userID');
 
