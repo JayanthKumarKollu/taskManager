@@ -24,7 +24,6 @@ app.use(
 
 app.use("/api/tasks",task);
 app.use("/api/login",userRoute);
-app.use(notFound) //this is specifically to display custom error message when we didn't found any routes.
 app.get(`/run_corn1`,async(req,res)=>{
     try {
     // This is your cron logic (e.g., sending emails)
@@ -36,6 +35,8 @@ app.get(`/run_corn1`,async(req,res)=>{
   }
 
 })
+app.use(notFound) //this is specifically to display custom error message when we didn't found any routes.
+
 
 const port = process.env.PORT ||3000;
 
