@@ -11,7 +11,7 @@ const sendNotification = async ()=>{
     pass:process.env.MAIL_PASS
   }
 });
-cron.schedule('* * * * *', async () => {
+// cron.schedule('* * * * *', async () => {
 const now = new Date();
 const fiveMins = new Date(now.getTime() + 5 * 60 * 1000);
     
@@ -42,7 +42,7 @@ to:task.userID.email,
   if(error){
     console.log("error",error)
   }else{
-    console.log("sent",info.response)
+    console.log("sent",info.response);
   }
   })
 
@@ -57,7 +57,7 @@ to:task.userID.email,
 
 
 
-});
+// });
 
 }
 
