@@ -30,7 +30,7 @@ const nowUTC = new Date(now.toISOString());
     
   const tasks = await Tasks.find({
     completed: false,
-    deadline: { $gte: now, $lte: fiveMins },
+    deadline: { $gte: now.toISOString(), $lte: fiveMins.toISOString() },
     isNotificationSent:{$ne:true},
   }).populate('userID');
 
