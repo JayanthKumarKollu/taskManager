@@ -27,8 +27,6 @@ const nowUTC = new Date(now.toISOString());
     completed: false,
     deadline: { $gte: nowUTC, $lte: fiveMinsUTC },
     isNotificationSent:{$ne:true},
-    nowU:nowUTC,
-    fiveMinsU:fiveMinsUTC
   }).populate('userID');
 
   tasks.forEach(async task=>{
