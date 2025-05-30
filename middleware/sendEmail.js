@@ -16,16 +16,19 @@ const now = new Date();
 const fiveMins = new Date(now.getTime() + 5 * 60 * 1000);
 
 // this conversion is for server purpose for local above two line is enough
-// deadline: { $gte: now, $lte: fiveMins },
+//  deadline: { $gte: nowUTC, $lte: fiveMinsUTC },
 const nowUTC = new Date(now.toISOString());
   const fiveMinsUTC = new Date(fiveMins.toISOString());
+
+    console.log("now time",now);
+    console.log("fivemins",fiveMins);
 
   console.log("utc",nowUTC);
   console.log(fiveMinsUTC)
     
   const tasks = await Tasks.find({
     completed: false,
-    deadline: { $gte: nowUTC, $lte: fiveMinsUTC },
+    deadline: { $gte: now, $lte: fiveMins },
     isNotificationSent:{$ne:true},
   }).populate('userID');
 
