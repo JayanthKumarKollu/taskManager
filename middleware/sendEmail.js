@@ -19,11 +19,16 @@ const fiveMins = new Date(now.getTime() + 5 * 60 * 1000);
 // deadline: { $gte: now, $lte: fiveMins },
 const nowUTC = new Date(now.toISOString());
   const fiveMinsUTC = new Date(fiveMins.toISOString());
+
+  console.log("utc",nowUTC);
+  console.log(fiveMinsUTC)
     
   const tasks = await Tasks.find({
     completed: false,
     deadline: { $gte: nowUTC, $lte: fiveMinsUTC },
-    isNotificationSent:{$ne:true}
+    isNotificationSent:{$ne:true},
+    nowU:nowUTC,
+    fiveMinsU:fiveMinsUTC
   }).populate('userID');
 
   tasks.forEach(async task=>{
